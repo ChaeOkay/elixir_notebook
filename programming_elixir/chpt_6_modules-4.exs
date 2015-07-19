@@ -1,4 +1,4 @@
-##Exercise: Functions - 6
+##Exercise: Modules - 4
 
 #### Write a recursive function
 #Implement function `sum(n)` that recursively calculates sum.
