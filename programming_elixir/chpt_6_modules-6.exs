@@ -24,11 +24,16 @@ defmodule BinarySearch do
   def try(answer, range, guess) when guess == answer, do:
     IO.puts "#{guess}"
 
-  def try(answer, range, guess) when guess > answer, do:
-    try(answer, range.first..guess, div(abs(guess-range.last),2))
+  def try(answer, range, guess) when guess > answer, do: (
+    new_guess = div(abs(guess-range.last),2)
+    IO.puts "Is it #{new_guess}?"
+    try(answer, range.first..guess, new_guess)
+  )
 
-  def try(answer, range, guess) when guess < answer, do:
-    try(answer, guess..range.last, guess + div(abs(range.last-guess),2))
+  def try(answer, range, guess) when guess < answer, do: (
+    new_guess = div(abs(range.last-guess),2)
+    try(answer, guess..range.last, guess + new_guess)
+  )
 end
 
 BinarySearch.guess(2, 1..10)
