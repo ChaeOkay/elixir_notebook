@@ -16,25 +16,21 @@
 # 273
 
 ##########################
-# Test
-# answer(33, 5, 100, 0) when 33 > 5, do: div(abs(33-100)), 5, 33, 0
-# answer(16, 5, 33, 0) when 16 > 5, do: div(abs(16-33)), 5, 16, 0
-# answer(8, 5, 16, 0) when 8 > 5, do: div(abs(8-16)), 5, 8, 0
-# answer(4, 5, 16, 0) when 4 < 5, do: div(16-4,2), 5, 16, 4
-# answer(6, 5, 16, 0) when 6 > 5, do: div(abs(6-16)), 5, 6, 0
-##########################
 
 defmodule BinarySearch do
-  def answer(guess, actual, upper, lower) when guess == actual, do:
+  def guess(answer, range), do:
+    try(answer, range, div(range.last - range.first,2))
+
+  def try(answer, range, guess) when guess == answer, do:
     IO.puts "#{guess}"
 
-  def answer(guess, actual, upper, lower) when guess > actual, do:
-    answer(div(abs(guess-upper),2), actual, guess, lower)
+  def try(answer, range, guess) when guess > answer, do:
+    try(answer, range.first..guess, div(abs(guess-range.last),2))
 
-  def answer(guess, actual, upper, lower) when guess < actual, do:
-    answer(guess + div(abs(upper-guess),2), actual, upper, guess)
+  def try(answer, range, guess) when guess < answer, do:
+    try(answer, guess..range.last, guess + div(abs(range.last-guess),2))
 end
 
-BinarySearch.answer(500, 273, 1000, 1)
-BinarySearch.answer(500, 14, 1000, 1)
-BinarySearch.answer(500, 998, 1000, 1)
+BinarySearch.guess(2, 1..10)
+BinarySearch.guess(273, 1..1000)
+BinarySearch.guess(784, 1..1000)
