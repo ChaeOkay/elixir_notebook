@@ -3,37 +3,35 @@
 #### Write a binary search
 # Write a binary search that outputs each midpoint number until it finds the
 # answer.
-#
-# Example:
-# Chomp.guess(273, 1..1000)
-# Is it 500
-# Is it 250
-# Is it 375
-# Is it 312
-# Is it 281
-# Is it 265
-# Is it 273
-# 273
 
-##########################
+#########################
 
 defmodule BinarySearch do
-  def guess(answer, range), do:
-    try(answer, range, div(range.last - range.first,2))
+  def guess(answer, range), do: (
+    new_guess = div(range.last - range.first,2)
+    IO.puts "Is it #{new_guess}?"
+    try(answer, range, new_guess)
+  )
 
   def try(answer, range, guess) when guess == answer, do:
     IO.puts "#{guess}"
 
   def try(answer, range, guess) when guess > answer, do: (
-    new_guess = div(abs(guess-range.last),2)
+    new_guess = range.last - div(abs(guess-range.last),2)
     IO.puts "Is it #{new_guess}?"
-    try(answer, range.first..guess, new_guess)
+    new_range_top = guess - 1
+    try(answer, range.first..new_range_top, new_guess)
   )
 
   def try(answer, range, guess) when guess < answer, do: (
-    new_guess = div(abs(range.last-guess),2)
+    new_guess = range.first + div(abs(range.last-guess),2)
+    IO.puts "Is it #{new_guess}?"
+    new_range_bottom = guess + 1
     try(answer, guess..range.last, guess + new_guess)
   )
+
+  def try(answer, range, guess), do:
+    IO.puts "I think something went wrong :( #{guess}"
 end
 
 BinarySearch.guess(2, 1..10)
