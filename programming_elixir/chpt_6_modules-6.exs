@@ -27,7 +27,7 @@ defmodule BinarySearch do
     new_guess = range.first + div(abs(range.last-guess),2)
     IO.puts "Is it #{new_guess}?"
     new_range_bottom = guess + 1
-    try(answer, guess..range.last, guess + new_guess)
+    try(answer, new_range_bottom..range.last, guess + new_guess)
   )
 
   def try(answer, range, guess), do:
