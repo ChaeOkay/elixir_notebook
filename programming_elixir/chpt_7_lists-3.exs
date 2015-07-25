@@ -10,10 +10,11 @@
 
 defmodule MyList do
   def caesar([], _), do: smile
-  def caesar([ head | tail ], codepoint_adder) when head > 109, do:
-   [ head + codepoint_adder - 26 | caesar(tail, codepoint_adder) ]
-  def caesar([ head | tail ], codepoint_adder), do:
-   [ head  + codepoint_adder | caesar(tail, codepoint_adder) ]
+  def caesar([ head | tail ], adder)
+    when head+adder > ?z,
+    do: [ head + adder - 26 | caesar(tail, adder) ]
+  def caesar([ head | tail ], adder),
+    do: [ head  + adder | caesar(tail, adder) ]
 
   def smile, do: [32, 58, 41]
 end
