@@ -6,6 +6,7 @@ defmodule Tone do
   defp _shouting?([], _), do: false
   defp _shouting?([head | tail], response) when response == true, do: true
   defp _shouting?([head | tail], response), do: _shouting?(tail, upcase?(head))
+
   defp upcase?(word), do: String.upcase(word) == word
 end
 
