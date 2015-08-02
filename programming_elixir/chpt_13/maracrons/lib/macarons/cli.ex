@@ -5,7 +5,9 @@ defmodule Macarons.CLI do
   Generate table of last _n_issues in a github project
   """
   def run(argv) do
-    parse_args(argv)
+    argv
+      |> parse_args
+      |> process
   end
 
   @doc """
@@ -28,5 +30,16 @@ defmodule Macarons.CLI do
     _                                   -> :help
 
     end
+  end
+
+  def process(:help) do
+    IO.puts """
+    usage: isses <user> <project> [ count | #{@default_count } ]
+    """
+    System.halt(0)
+  end
+
+  def process({ user, project, _count}) do
+    Issues.GithubIssues.fetch(user, project)
   end
 end
