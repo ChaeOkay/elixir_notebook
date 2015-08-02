@@ -2,6 +2,7 @@ defmodule Tone do
   def question?(phrase), do: String.contains?(phrase, "?")
 
   def shouting?(words) when is_list(words), do: _shouting?(words, false)
+  def shouting?(phrase), do: shouting?(String.split(phrase))
   defp _shouting?([], _), do: false
   defp _shouting?([head | tail], response) when response == true, do: true
   defp _shouting?([head | tail], response), do: _shouting?(tail, upcase?(head))
@@ -17,10 +18,8 @@ defmodule Teenager do
               }
 
   def hey(phrase) do
-    words = String.split(phrase)
-
     cond do
-      shouting?(words) == true ->
+      shouting?(phrase) == true ->
         @response.shouting
       question?(phrase) == true ->
         @response.question
