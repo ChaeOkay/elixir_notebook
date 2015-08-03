@@ -10,10 +10,12 @@ defmodule Teenager do
     cond do
       String.ends_with?(phrase, "?") ->
         @response.question
-      Regex.match?(~r/[A-Z]{2,}/, phrase) ->
-        @response.shouting
       String.rstrip(phrase) |> String.length == 0 ->
         @response.silence
+      Regex.match?(~r/[A-Z]{2,}/, phrase) ->
+        @response.shouting
+      Regex.match?(~r/Д/, phrase) ->
+        @response.shouting
       true ->
         @response.default
     end
