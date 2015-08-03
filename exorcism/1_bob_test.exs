@@ -46,12 +46,10 @@ defmodule TeenagerTest do
     assert Teenager.hey("Ending with ? means a question.") == "Whatever."
   end
 
-  @tag :pending
   test "silence" do
     assert Teenager.hey("") == "Fine. Be that way!"
   end
 
-  @tag :pending
   test "prolonged silence" do
     assert Teenager.hey("  ") == "Fine. Be that way!"
   end

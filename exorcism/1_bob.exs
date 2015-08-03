@@ -3,6 +3,7 @@ defmodule Teenager do
                default: "Whatever.",
                question: "Sure.",
                shouting: "Whoa, chill out!",
+               silence: "Fine. Be that way!"
               }
 
   def hey(phrase) do
@@ -11,6 +12,8 @@ defmodule Teenager do
         @response.question
       Regex.match?(~r/[A-Z]{2,}/, phrase) ->
         @response.shouting
+      String.rstrip(phrase) |> String.length == 0 ->
+        @response.silence
       true ->
         @response.default
     end
