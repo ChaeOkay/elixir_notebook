@@ -7,7 +7,7 @@ defmodule Teenager do
 
   def hey(phrase) do
     cond do
-      Regex.match?(~r/[\?]$/, phrase) ->
+      String.ends_with?(phrase, "?") ->
         @response.question
       Regex.match?(~r/[A-Z]{2,}/, phrase) ->
         @response.shouting
