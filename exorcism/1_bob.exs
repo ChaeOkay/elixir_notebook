@@ -8,13 +8,13 @@ defmodule Teenager do
 
   def hey(phrase) do
     cond do
-      String.ends_with?(phrase, "?") ->
-        @response.question
       String.rstrip(phrase) |> String.length == 0 ->
         @response.silence
-      Regex.match?(~r/[A-Z]{2,}/, phrase) ->
+      phrase =~ ~r/\?$/ ->
+        @response.question
+      phrase =~ ~r/[A-Z]{2,}/ ->
         @response.shouting
-      Regex.match?(~r/Д/, phrase) ->
+      phrase =~ ~r/Д/ ->
         @response.shouting
       true ->
         @response.default
